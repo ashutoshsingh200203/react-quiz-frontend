@@ -1,0 +1,42 @@
+body{
+  max-width: 1750px;
+  margin: 0 auto;
+}
+.container{
+  margin-top: 50px;
+}
+body{
+  background-color: aliceblue;
+}
+.head{
+  margin-right: 80px;
+}
+.App{
+  width: 500px;
+  margin: auto;
+}
+.buttons{
+  width: 446px;
+}
+.buttons button{
+   width: 90px;
+}
+h1{
+  margin-left: 70px
+}
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+.options input:hover {
+  background-color: rgb(224, 224, 224);
+  font-size: large;
+  cursor: pointer;
+}
+.ques{
+  font-size: 20px;
+}
