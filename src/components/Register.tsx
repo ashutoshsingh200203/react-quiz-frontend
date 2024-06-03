@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router'
 import registerLogs from '../../types/register'
 
-export default function Register() {
+export default function Register() : JSX.Element{
 
   const [values , setValues] = useState<registerLogs>({
     name : '',
@@ -13,7 +13,7 @@ export default function Register() {
   })
   const navigate = useNavigate() ;
 
-const handleRegister = async () =>{
+const handleRegister = async () : Promise<void> =>{
   try {
     let url : string = `http://localhost:5000/auth/register`
     const response :AxiosResponse = await axios.post(url , values)

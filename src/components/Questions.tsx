@@ -25,10 +25,10 @@ type Questions  = {
           <p className="ques">{question}</p>
           </div>
           <ul className="list-group list-group-flush p-2 options text-center">
-            <input type="button" value={options[0]} className='btn p-2' onClick={checkAnswer}/>
-            <input type="button" value={options[1]} className='btn p-2' onClick={checkAnswer}/>
-            <input type="button" value={options[2]} className='btn p-2' onClick={checkAnswer}/>
-            <input type="button" value={options[3]} className='btn p-2' onClick={checkAnswer}/>
+            <input type="button" value={options[0]} className='btn p-2 opt' id='opt-1' onClick={checkAnswer}/>
+            <input type="button" value={options[1]} className='btn p-2 opt' id='opt-2' onClick={checkAnswer}/>
+            <input type="button" value={options[2]} className='btn p-2 opt' id='opt-3' onClick={checkAnswer}/>
+            <input type="button" value={options[3]} className='btn p-2 opt' id='opt-4' onClick={checkAnswer}/>
           </ul>
         </div>
       </div>

@@ -13,29 +13,30 @@ export default function Quiz() {
     question: string,
     type: string
   }
-  const [number, setNumber] = useState(0);
-  const [question, setQuestion] = useState('')
-  const [correct, setCorrect] = useState('')
-  const [difficulty, setdifficulty] = useState('')
-  const [score, setScore] = useState(0)
+
+  const [number, setNumber] = useState<number>(0);
+  const [question, setQuestion] = useState<string>('')
+  const [correct, setCorrect] = useState<string>('')
+  const [difficulty, setdifficulty] = useState<string>('')
+  const [score, setScore] = useState<number>(0)
   const [finaldata, setFinaldata] = useState<dataresult[]>([])
   const [option, setOption] = useState<string[]>([])
   const navigate = useNavigate()
 
-  const shuffle = (array: string[]) => {
+  const shuffle = (array: string[]): string[] => {
     return array.sort(() => Math.random() - 0.5);
   };
-  var shuffledoptions : string[] = []
+
+  var shuffledoptions: string[] = []
+
   const fetchData = async () => {
 
-    const response = await axios.get('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple')
-    const data: dataresult[] = response.data.results;
-     
-    for(let i=0 ; i<data.length ; i++)
-    {
+    const data : dataresult[] = (await axios.get('https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple')).data.results ;
+
+    for (let i : number = 0; i < data.length; i++) {
       (data[i].incorrect_answers).push(data[i].correct_answer)
     }
-    
+
     console.log(shuffledoptions)
     setNumber(number)
     setQuestion(data[0].question)
@@ -46,7 +47,7 @@ export default function Quiz() {
     setFinaldata(data)
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async () : Promise<void> => {
     localStorage.removeItem('token')
     navigate('/auth/login')
   }
@@ -58,16 +59,23 @@ export default function Quiz() {
     setData()
   }, [])
 
-  const doNext = () => {
+  const doNext = () : void => {
+    let elements : HTMLCollectionOf<Element> = document.getElementsByClassName('opt')
+    for(let i:number = 0; i<elements.length ; i++)
+    {
+      elements[i].classList.remove("disabled")
+      elements[i].classList.remove("text-success")
+      elements[i].classList.remove("text-danger" )
+    }
     setNumber(number + 1)
     setQuestion(finaldata[number + 1].question)
     setdifficulty(finaldata[number + 1].difficulty)
     setCorrect(finaldata[number + 1].correct_answer)
     shuffledoptions = shuffle(finaldata[number + 1].incorrect_answers)
-    setOption((shuffledoptions ))
+    setOption((shuffledoptions))
   }
 
-  const doPrev = () => {
+  const doPrev = () : void=> {
     setNumber(number - 1)
     setQuestion(finaldata[number - 1].question)
     setdifficulty(finaldata[number - 1].difficulty)
@@ -77,10 +85,24 @@ export default function Quiz() {
 
   const checkAnswer: MouseEventHandler<HTMLInputElement> = (e) => {
     console.log(e)
-    if (e.currentTarget.value === correct) {
-      setScore(score + 1);
+    let elements : NodeListOf<HTMLInputElement> = document.querySelectorAll('.opt')
+    if(e.currentTarget.value === correct)
+    {
+      setScore(score + 1)
     }
-    // document.getElementById
+    for(let i:number = 0; i<elements.length ; i++)
+    {
+      elements[i].classList.add("disabled")
+      if (elements[i].value === correct) {
+        elements[i].classList.add('text-success')
+        console.log(("true"))
+      }
+      else
+      {
+        console.log(("false"))
+        elements[i].classList.add('text-danger') 
+      }
+    }
   }
 
   return (

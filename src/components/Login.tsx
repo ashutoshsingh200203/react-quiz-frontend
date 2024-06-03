@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { redirect, useNavigate } from 'react-router'
 
-export default function Login() {
-  const [email , setEmail] = useState('')
-  const [pass , setPass] = useState('')
+export default function Login() : JSX.Element  {
+  const [email , setEmail] = useState<string>('')
+  const [pass , setPass] = useState<string>('')
   const navigate = useNavigate();
 
-  const handleLogin = async ()=>{
+  const handleLogin = async () : Promise<void>=>{
     try {
       const url : string = `http://localhost:5000/auth/login`
       const response = await axios.post(url,{
