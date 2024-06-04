@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
+import Chat from './components/Chat';
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       <Route path='auth/login' element={<Login/>}></Route>
       <Route path='auth/register' element={<Register/>}></Route>
+      <Route path='/chat' element={<Chat/>} />
       <Route path='/' element={<Home/>}></Route>
     </Routes>
     </BrowserRouter>
